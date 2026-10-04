@@ -213,7 +213,7 @@ private struct FixCard: View {
         } status: {
             if pending {
                 HxBadge(text: "WARN", tone: .warning, bracket: true)
-                Text(verbatim: L("restart steam")).help(on ? L("applied. active after steam restarts") : L("removed. gone after steam restarts"))
+                Text(verbatim: L("restart %@", model.restartTarget)).help(on ? L("applied. loads when the bottle restarts") : L("removed. gone when the bottle restarts"))
             } else if on {
                 HxBadge(text: "OK", tone: .success, bracket: true)
                 Text(verbatim: L("applied"))

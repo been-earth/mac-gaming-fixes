@@ -313,7 +313,15 @@ struct Settings: Codable, Equatable {
 
     // MARK: fixes
 
-    private var restartNote: String { wineRunning ? L("restart steam to activate") : "" }
+    /// What to relaunch so the new files load. The patched server starts with the bottle, so restarting
+    /// a game is not enough while Steam keeps the bottle alive, and helpers left behind keep it alive too.
+    var restartTarget: String {
+        if steamWine { return "steam" }
+        let games = wineNames.filter { !Self.plumbing.contains($0.lowercased()) }.sorted()
+        if !games.isEmpty { return games.prefix(2).joined(separator: ", ") }
+        return wineNames.isEmpty ? "crossover" : L("wine (%@ still running)", wineNames.sorted().prefix(2).joined(separator: ", "))
+    }
+    private var restartNote: String { wineRunning ? L("restart %@ to activate", restartTarget) : "" }
 
     /// Brings the disk to "exactly these fixes applied", off the main thread: codesign takes a moment.
     private func write(_ want: Set<FeatureID>, touching ids: [FeatureID], then done: @escaping (Error?) -> Void) {
@@ -358,10 +366,15 @@ struct Settings: Codable, Equatable {
 
     /// CrossOver updates and CXPatcher re-patches replace the patched files. Put back what was wanted, once per launch.
     private func reapplyIfWiped() {
-        guard live, !inSetup, settings.reapply, !reapplied, !busy, let wanted = settings.wanted else { return }
+        guard live, !inSetup, !reapplied, !busy, let wanted = settings.wanted else { return }
         let wiped = FeatureID.fixes.filter { wanted.contains($0.rawValue) && !isApplied($0) }
         guard !wiped.isEmpty, crossover != nil else { return }
         reapplied = true
+        guard settings.reapply else {  // the user wants to do it by hand: say so, once
+            say(.warn, "[WARN] " + L("crossover was updated: the fixes are gone"))
+            toast(.warning, L("crossover was updated: the fixes are gone"), L("apply them again from the fixes page"))
+            return
+        }
         say(.output, "[INFO] " + L("crossover was updated: applying the fixes again"))
         setFixes(wiped, on: true)
     }

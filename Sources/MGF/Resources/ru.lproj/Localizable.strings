@@ -19,7 +19,10 @@
 "all fixes applied" = "все фиксы применены";
 "app" = "приложение";
 "applied" = "применено";
-"applied. active after steam restarts" = "применено. заработает после перезапуска steam";
+"applied. loads when the bottle restarts" = "применено. загрузится после перезапуска бутылки";
+"after a crossover update, open mgf once: it puts the fixes back" = "после обновления crossover откройте mgf один раз: он вернёт фиксы на место";
+"anything already running in the bottle keeps the old files: restart steam or the game afterwards" = "всё, что уже запущено в бутылке, использует старые файлы: потом перезапустите steam или игру";
+"apply them again from the fixes page" = "примените их заново на странице фиксов";
 "apply %d" = "применить: %d";
 "apply recommended" = "применить рекомендуемые";
 "audio" = "звук";
@@ -50,6 +53,7 @@
 "crossover app" = "приложение crossover";
 "crossover not found. set the path in settings" = "crossover не найден. укажите путь в настройках";
 "crossover was updated: applying the fixes again" = "crossover обновился: применяю фиксы заново";
+"crossover was updated: the fixes are gone" = "crossover обновился: фиксы пропали";
 "details" = "подробнее";
 "detect" = "найти";
 "discard" = "сбросить";
@@ -101,15 +105,15 @@
 "registry saves wait while wineserver uses more than this. 17 % measured with deadlock" = "запись реестра ждёт, пока wineserver загружен сильнее этого. с deadlock замерено 17 %";
 "remove %@" = "убрать %@";
 "removed" = "удалено";
-"removed. gone after steam restarts" = "снято. исчезнет после перезапуска steam";
-"restart steam" = "перезапустите steam";
-"restart steam to activate" = "перезапустите steam, чтобы изменения заработали";
+"removed. gone when the bottle restarts" = "снято. исчезнет после перезапуска бутылки";
+"restart %@" = "перезапустите %@";
+"restart %@ to activate" = "перезапустите %@, чтобы изменения заработали";
+"restart %@: games started earlier keep the old files" = "перезапустите %@: игры, запущенные раньше, используют старые файлы";
 "restores the original wineserver and audio driver. settings are kept." = "восстанавливает оригинальные wineserver и аудиодрайвер. настройки сохраняются.";
 "revert %d" = "откатить: %d";
 "revert all" = "откатить все";
 "revert every fix" = "откатить все фиксы";
 "running" = "запущен";
-"running games keep the old files until steam restarts" = "запущенные игры используют старые файлы до перезапуска steam";
 "save" = "сохранить";
 "sets the system output and microphone without a trip to system settings, and the mic input level. warns when a bluetooth mic would drop your headphones to phone quality." = "выбирает системный выход и микрофон без похода в системные настройки, а также уровень входа микрофона. предупреждает, если bluetooth-микрофон переведёт наушники в телефонное качество.";
 "settings" = "настройки";
@@ -143,6 +147,7 @@
 "what game sockets ask the wi-fi chip for" = "что игровые сокеты запрашивают у чипа wi-fi";
 "when macos game mode turns on" = "при включении игрового режима macos";
 "wine games do not always trigger it. add the game above to be sure" = "игры под wine включают его не всегда. для надёжности добавьте игру выше";
+"wine (%@ still running)" = "wine (%@ ещё работает)";
 "wine rewrites its 12 mb registry every 30 s and freezes the whole bottle for ~240 ms while it does. this holds the save back while a game runs and lets it through when the bottle is idle or exits." = "wine каждые 30 с переписывает реестр на 12 мб и на это время замораживает всю бутылку примерно на 240 мс. фикс откладывает запись, пока идёт игра, и пропускает её, когда бутылка простаивает или закрывается.";
 "windows games on a mac. no *net jitter*, no *broken sound*." = "windows-игры на mac. без *net jitter* и *сломанного звука*.";
 "for online games that hitch every 30 seconds: the net jitter graph spikes and the game catches up in one jump." = "если онлайн-игра дёргается каждые 30 секунд: график net jitter подскакивает, а игра догоняет рывком.";
@@ -221,7 +226,6 @@
 "ready. 1 fix is in place." = "готово. применён 1 фикс.";
 "ready. %d fixes are in place." = "готово. применено фиксов: %d.";
 "apply them any time from the fixes page" = "их можно применить в любой момент на странице фиксов";
-"restart steam if it is running: games started earlier keep the old files" = "перезапустите steam, если он запущен: игры, запущенные раньше, используют старые файлы";
 "function keys and audio devices are on the tools page" = "функциональные клавиши и аудиоустройства находятся на странице инструментов";
 "every fix has a switch and an article with its measurements" = "у каждого фикса есть переключатель и статья с замерами";
 "macos permission" = "разрешение macos";

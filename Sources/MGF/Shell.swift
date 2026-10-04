@@ -290,7 +290,7 @@ private struct ConfirmDialog: View {
                 }
             }
             .surface(Hax.bgPanel, border: Hax.borderSubtle, radius: Hax.radiusMD)
-            HxHint(L("running games keep the old files until steam restarts"))
+            HxHint(L("anything already running in the bottle keeps the old files: restart steam or the game afterwards"))
         } actions: {
             HxButton(title: L("cancel"), variant: .ghost) { model.confirm = nil }
             if applying {

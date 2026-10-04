@@ -396,8 +396,9 @@ struct SetupView: View {
                     if count == 0 {
                         bullet(L("apply them any time from the fixes page"))
                     } else if model.wineRunning {
-                        bullet(L("restart steam if it is running: games started earlier keep the old files"))
+                        bullet(L("restart %@: games started earlier keep the old files", model.restartTarget))
                     }
+                    if count > 0 { bullet(L("after a crossover update, open mgf once: it puts the fixes back")) }
                     bullet(L("function keys and audio devices are on the tools page"))
                     bullet(L("every fix has a switch and an article with its measurements"))
                 }
