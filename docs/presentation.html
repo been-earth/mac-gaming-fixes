@@ -1,0 +1,46 @@
+<!doctype html>
+<!-- The picture at the top of the README: logo and name, the main window, then what the fixes change.
+     To render it again after replacing screenshot.png:
+     "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --hide-scrollbars \
+       --allow-file-access-from-files --window-size=1280,1190 --force-device-scale-factor=2 \
+       --screenshot=docs/presentation.png docs/presentation.html -->
+<html lang="en">
+<meta charset="utf-8">
+<title>MacGamingFixes</title>
+<style>
+  @font-face { font-family: "Red Hat Mono"; font-weight: 300 700; src: url("../Sources/MGF/Resources/Fonts/RedHatMono.ttf"); }
+  /* the Hax tokens the app uses (Sources/MGF/Hax.swift) */
+  :root { --page: #070b09; --card: #101813; --line: #1a251d; --line-strong: #28382d; --text: #e6efe8; --text-2: #a9b8ad; --muted: #7a8b7e; --accent: #39ff6e; --warning: #ffbd2e; }
+  html, body { margin: 0; background: var(--page); }
+  body { width: 1280px; height: 1190px; box-sizing: border-box; padding: 56px 120px; display: flex; flex-direction: column; align-items: center; gap: 40px;
+         font: 400 14px/1.5 "Red Hat Mono", monospace; color: var(--text-2); -webkit-font-smoothing: antialiased; }
+  header { display: flex; align-items: center; gap: 20px; }
+  header img { width: 72px; height: 72px; }
+  h1 { margin: 0; font: 500 32px/1 "Red Hat Mono", monospace; letter-spacing: -0.03em; color: var(--text); }
+  header p { margin: 8px 0 0; color: var(--muted); }
+  .shot { display: block; width: 1040px; border-radius: 13px; box-shadow: 0 0 0 1px var(--line-strong), 0 24px 64px rgba(0, 0, 0, .6); }
+  h2 { margin: 8px 0 0; font: 500 28px/1.2 "Red Hat Mono", monospace; letter-spacing: -0.03em; color: var(--text); text-align: center; }
+  b { font-weight: inherit; color: var(--accent); white-space: nowrap; }
+  ul { margin: 0; padding: 0; list-style: none; width: 1040px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  li { padding: 16px; border: 1px solid var(--line); border-radius: 6px; background: var(--card); }
+  li strong { display: block; margin-bottom: 8px; font: 500 20px/1.2 "Red Hat Mono", monospace; color: var(--text); }
+  li strong i { font-style: normal; color: var(--warning); }
+  li strong em { font-style: normal; color: var(--accent); }
+  footer { margin-top: -16px; font-size: 12px; color: var(--muted); }
+</style>
+<header>
+  <img src="icon.png" alt="">
+  <div>
+    <h1>MacGamingFixes</h1>
+    <p>// fixes for windows games under crossover</p>
+  </div>
+</header>
+<img class="shot" src="screenshot.png" alt="the main window: three fixes, each with a switch and its before and after">
+<h2>windows games on a mac. no <b>net jitter</b>, no <b>broken sound</b>.</h2>
+<ul>
+  <li><strong><i>264 ms</i> → <em>10 ms</em></strong>the freeze every 30 seconds: wine's registry save now waits until you stop playing.</li>
+  <li><strong><i>8.7 ms</i> → <em>3.8 ms</em></strong>latency to the router on wi-fi: game sockets ask the chip for real-time service.</li>
+  <li><strong><i>6.3 %</i> → <em>0.1 %</em></strong>silence cut into game audio: a short buffer at any sample rate, no 96 khz device.</li>
+</ul>
+<footer>// measured on one macbook pro m3 max with crossover 26 and deadlock. every fix is a switch, and reverting restores the original files.</footer>
+</html>

@@ -1,0 +1,5 @@
+.build/
+build/
+Sources/MGF/Resources/Payload/*.dylib
+Sources/MGF/Resources/Payload/*.so
+.DS_Store
