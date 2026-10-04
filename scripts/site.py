@@ -20,7 +20,7 @@ FIXES, TOOLS = SLUGS[:3], SLUGS[3:]
 
 T = {
 'en': dict(
-    lang='en', other='ru', other_label='по-русски', home='', dir='en',
+    lang='en', other='ru', other_label='RU', home='', dir='en',
     title='MacGamingFixes: fix stutter, net jitter and crackling audio in CrossOver games on Mac',
     description='Free macOS app for Apple silicon that fixes the stutter every 30 seconds, net jitter on Wi-Fi, crackling sound and a choppy mic in CS2, Deadlock and other Windows games running in CrossOver. Plus F1–F12 without Fn and quick audio device switching.',
     h1='windows games in crossover on a mac. no <em>stutter</em>, no <em>net jitter</em>, no <em>crackling sound</em>.',
@@ -59,7 +59,7 @@ T = {
     ],
 ),
 'ru': dict(
-    lang='ru', other='en', other_label='in english', home='../', dir='ru',
+    lang='ru', other='en', other_label='EN', home='../', dir='ru',
     title='MacGamingFixes: лаги, net jitter и треск звука в играх через CrossOver на Mac',
     description='Бесплатное приложение для macOS на Apple silicon: убирает лаги каждые 30 секунд, net jitter по Wi-Fi, треск звука и заикающийся микрофон в CS2, Deadlock и других Windows-играх через CrossOver. Плюс F1–F12 без Fn и быстрый выбор аудиоустройств.',
     h1='windows-игры в crossover на mac. без <em>лагов</em>, без <em>net jitter</em>, без <em>треска звука</em>.',

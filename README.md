@@ -14,7 +14,7 @@ puts the original files back.
 
 **[Download the latest release](https://github.com/been-earth/mac-gaming-fixes/releases/latest)** ·
 **[mgf.been.earth](https://mgf.been.earth/)** ·
-interface in English and Russian · [по-русски](#по-русски)
+interface in English and Russian · [RU](#ru)
 
 ## Symptoms it fixes
 
@@ -221,7 +221,7 @@ Third-party, with their own licenses:
 
 MacGamingFixes is not affiliated with CodeWeavers, Valve or Apple.
 
-## По-русски
+## RU
 
 Windows-игры на Mac через CrossOver: **CS2 и Deadlock лагают каждые 30 секунд**, по Wi-Fi
 **высокий net jitter**, **звук трещит**, а **микрофон заикается** в голосовом чате. MacGamingFixes —
