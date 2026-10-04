@@ -7,7 +7,7 @@ import html, pathlib, re, shutil, subprocess, sys
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 DOCS = ROOT / 'docs'
 RES = ROOT / 'Sources/MGF/Resources'
-BASE = 'https://been-earth.github.io/mac-gaming-fixes/'
+BASE = 'https://mgf.been.earth/'  # docs/CNAME; github.io redirects here
 REPO = 'https://github.com/been-earth/mac-gaming-fixes'
 VERSION = re.search(r'CFBundleShortVersionString</key><string>([^<]+)', (ROOT / 'scripts/Info.plist').read_text()).group(1)
 CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'

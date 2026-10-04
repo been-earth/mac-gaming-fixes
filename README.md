@@ -13,7 +13,7 @@ switching **headphones and microphone** before a match. Every fix is a switch, a
 puts the original files back.
 
 **[Download the latest release](https://github.com/been-earth/mac-gaming-fixes/releases/latest)** ·
-**[Website](https://been-earth.github.io/mac-gaming-fixes/)** ·
+**[mgf.been.earth](https://mgf.been.earth/)** ·
 interface in English and Russian · [по-русски](#по-русски)
 
 ## Symptoms it fixes
@@ -183,7 +183,7 @@ reads the system but never changes it, and saves no settings.
   round trip, the write probe, the quarantine flag, triggers, the article parser, the grid.
 - `scripts/` — app bundling, the installer, the translation check, the asset downloader.
 - `assets/` — sources of the app icon and wordmark, and the installer's background.
-- `docs/` — the GitHub Pages site at [been-earth.github.io/mac-gaming-fixes](https://been-earth.github.io/mac-gaming-fixes/):
+- `docs/` — the GitHub Pages site at [mgf.been.earth](https://mgf.been.earth/):
   two landing pages and the articles as HTML, all written by `scripts/site.py` from the Markdown
   in `Sources/MGF/Resources` (run `make site` after editing an article); the picture at the top of
   this file and the page it is rendered from; the social preview image.
