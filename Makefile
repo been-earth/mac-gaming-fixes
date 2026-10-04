@@ -4,7 +4,7 @@ PAYLOAD := Sources/MGF/Resources/Payload
 # CrossOver's Wine is x86_64 (it runs under Rosetta), so both libraries are too.
 CC_PAYLOAD := clang -arch x86_64 -O2 -mmacosx-version-min=10.15 -dynamiclib
 
-.PHONY: payload build dmg run test clean
+.PHONY: payload build dmg run test site clean
 
 payload: $(PAYLOAD)/wineserver_fix.dylib $(PAYLOAD)/winecoreaudio.so
 
@@ -34,6 +34,10 @@ run: build
 test: payload
 	swift test
 	scripts/check-strings.py
+
+# docs/ is the GitHub Pages site: the landing pages, the articles as HTML, the social preview image.
+site:
+	scripts/site.py
 
 clean:
 	rm -rf .build build $(PAYLOAD)/*.dylib $(PAYLOAD)/*.so

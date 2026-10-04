@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>отсрочка записи реестра · MacGamingFixes</title>
+<meta name="description" content="wine дважды в минуту замораживает все процессы бутылки примерно на четверть секунды, чтобы переписать реестр. этот фикс придерживает запись, пока идёт игра.">
+<link rel="canonical" href="https://been-earth.github.io/mac-gaming-fixes/ru/registry-save-deferral.html">
+<link rel="alternate" hreflang="en" href="https://been-earth.github.io/mac-gaming-fixes/en/registry-save-deferral.html">
+<link rel="alternate" hreflang="ru" href="https://been-earth.github.io/mac-gaming-fixes/ru/registry-save-deferral.html">
+<link rel="alternate" hreflang="x-default" href="https://been-earth.github.io/mac-gaming-fixes/en/registry-save-deferral.html">
+<link rel="icon" href="../icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="отсрочка записи реестра · MacGamingFixes">
+<meta property="og:description" content="wine дважды в минуту замораживает все процессы бутылки примерно на четверть секунды, чтобы переписать реестр. этот фикс придерживает запись, пока идёт игра.">
+<meta property="og:url" content="https://been-earth.github.io/mac-gaming-fixes/ru/registry-save-deferral.html">
+<meta property="og:image" content="https://been-earth.github.io/mac-gaming-fixes/social.png">
+<meta property="og:image:width" content="2560"><meta property="og:image:height" content="1280">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+@font-face { font-family: "Red Hat Mono"; font-weight: 300 700; src: url("../assets/RedHatMono.ttf"); font-display: swap; }
+:root { --page: #070b09; --card: #101813; --panel: #0c120e; --line: #1a251d; --line-strong: #28382d; --text: #e6efe8; --text-2: #a9b8ad; --muted: #7a8b7e; --accent: #39ff6e; --accent-dim: #1f6b38; --warning: #ffbd2e; }
+* { box-sizing: border-box; }
+html { background: var(--page); scroll-behavior: smooth; }
+body { margin: 0; font: 400 15px/1.6 "Red Hat Mono", ui-monospace, Menlo, monospace; color: var(--text-2); -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+code { font: inherit; font-size: 0.93em; padding: 1px 5px; border-radius: 4px; background: var(--card); border: 1px solid var(--line); color: var(--text); }
+pre { margin: 0; padding: 14px 16px; overflow-x: auto; font: 400 13px/1.55 "Red Hat Mono", ui-monospace, Menlo, monospace; color: var(--text); }
+pre code { padding: 0; border: 0; background: none; font-size: inherit; }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+header.top { position: sticky; top: 0; z-index: 2; background: rgba(7, 11, 9, .92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+header.top .wrap { display: flex; align-items: center; gap: 20px; height: 56px; }
+.brand { display: flex; align-items: center; gap: 10px; color: var(--text); font-weight: 500; letter-spacing: -0.02em; }
+.brand img { width: 28px; height: 28px; border-radius: 7px; }
+nav { display: flex; gap: 18px; margin-left: auto; font-size: 13px; }
+nav a { color: var(--text-2); } nav a.gh { color: var(--text); }
+h1 { margin: 0; font: 500 clamp(26px, 3.4vw, 40px)/1.2 "Red Hat Mono", ui-monospace, monospace; letter-spacing: -0.03em; color: var(--text); max-width: 900px; }
+h1 em { font-style: normal; color: var(--accent); white-space: nowrap; }
+h2 { margin: 0 0 8px; font: 500 clamp(22px, 2.4vw, 28px)/1.25 "Red Hat Mono", ui-monospace, monospace; letter-spacing: -0.03em; color: var(--text); }
+h3 { margin: 28px 0 8px; font: 500 17px/1.4 "Red Hat Mono", ui-monospace, monospace; color: var(--text); }
+section { padding: 56px 0; border-top: 1px solid var(--line); } section.hero { border: 0; padding: 72px 0 56px; }
+.lead { max-width: 820px; margin: 20px 0 28px; font-size: 16px; }
+.sub { margin: 0 0 28px; color: var(--muted); max-width: 820px; }
+.btns { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 16px; border-radius: 6px; font-size: 14px; font-weight: 500; border: 1px solid var(--line-strong); color: var(--text); background: var(--card); }
+.btn:hover { text-decoration: none; border-color: var(--accent-dim); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #06130a; } .btn.primary:hover { filter: brightness(1.08); }
+.btn svg { width: 16px; height: 16px; }
+.facts { margin: 18px 0 0; font-size: 13px; color: var(--muted); }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; } .grid.two { grid-template-columns: repeat(2, 1fr); }
+.card { display: flex; flex-direction: column; gap: 12px; padding: 18px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); }
+.card .t { display: flex; align-items: center; gap: 10px; color: var(--text); font-weight: 500; font-size: 16px; }
+.card .t svg { width: 20px; height: 20px; color: var(--accent); flex: none; }
+.card .use { color: var(--text); } .card .mech { font-size: 13px; color: var(--muted); }
+.card .more { margin-top: auto; font-size: 13px; }
+.bars { display: grid; grid-template-columns: auto 1fr auto; gap: 6px 10px; align-items: center; font-size: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
+.bars .l { grid-column: 1 / -1; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; font-size: 11px; }
+.bars i { display: block; height: 8px; border-radius: 2px; } .bars i.b { background: var(--warning); } .bars i.a { background: var(--accent); }
+.bars b { font-weight: 500; color: var(--text); white-space: nowrap; }
+.faq p { max-width: 820px; margin: 0; }
+ol.steps { margin: 20px 0 0; padding-left: 22px; max-width: 820px; } ol.steps li { margin: 8px 0; padding-left: 4px; }
+.note { max-width: 820px; } .note p { margin: 8px 0; }
+figure.code { margin: 16px 0; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); overflow: hidden; max-width: 820px; }
+figure.code figcaption { padding: 6px 16px; border-bottom: 1px solid var(--line); font-size: 12px; color: var(--muted); }
+aside.warn, aside.note-box { margin: 16px 0; padding: 12px 14px; border-left: 2px solid var(--warning); background: var(--card); border-radius: 0 6px 6px 0; max-width: 820px; }
+aside.warn::before { content: "[WARN] "; color: var(--warning); }
+footer.bottom { padding: 32px 0 48px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+article { max-width: 820px; padding: 48px 0; } article h1 { font-size: clamp(26px, 3vw, 34px); } article .meta { margin: 8px 0 32px; font-size: 13px; color: var(--muted); }
+article h2 { margin: 36px 0 10px; font-size: 20px; } article p { margin: 10px 0; } article ul { padding-left: 22px; } article li { margin: 4px 0; }
+article table { border-collapse: collapse; margin: 16px 0; font-size: 13px; width: 100%; max-width: 820px; }
+article th, article td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--line); vertical-align: top; } article th { color: var(--muted); font-weight: 500; }
+article .bars { max-width: 480px; margin: 16px 0; padding: 12px 14px; border: 1px solid var(--line); border-radius: 6px; background: var(--card); }
+.crumbs { font-size: 13px; color: var(--muted); margin-bottom: 24px; } .crumbs a { color: var(--text-2); }
+.cta { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+@media (max-width: 860px) { .grid, .grid.two { grid-template-columns: 1fr; } nav .hide { display: none; } section { padding: 40px 0; } section.hero { padding: 48px 0 40px; } }
+</style>
+
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="../ru/"><img src="../icon.png" alt="">MacGamingFixes</a>
+  <nav><a class="hide" href="../ru/">все фиксы</a><a href="../en/registry-save-deferral.html" hreflang="en">in english</a><a class="gh" href="https://github.com/been-earth/mac-gaming-fixes">github ↗</a></nav>
+</div></header>
+<main class="wrap">
+<article>
+<div class="crumbs"><a href="../ru/">macgamingfixes</a> / отсрочка записи реестра</div>
+<h1>отсрочка записи реестра</h1>
+<p class="meta">часть macgamingfixes. та же статья есть в приложении, рядом с переключателем.</p>
+<p>wine дважды в минуту замораживает все процессы бутылки примерно на четверть секунды, чтобы переписать реестр. этот фикс придерживает запись, пока идёт игра.</p>
+<h2 id="симптом">симптом</h2>
+<p>каждые 30 с игра подтормаживает. на сетевом графике 15–17 тиков приходят одной пачкой. то же самое происходит на loopback, так что wi-fi ни при чём.</p>
+<h2 id="причина">причина</h2>
+<p>wineserver однопоточный. каждые 30 с он в этом единственном потоке целиком переписывает каждую ветку реестра, изменившуюся с прошлого сохранения, одним текстовым файлом. в бутылке со steam <code>system.reg</code> весит около 12 мб (36.5 тыс. ключей), поэтому одна запись блокирует все обращения к серверу и все события сокетов примерно на 240 мс.</p>
+<p>ветка не остаётся чистой надолго: steam раз в минуту трогает <code>HKLM\Software\Wow6432Node\Valve\SteamService</code>.</p>
+<h2 id="замеры">замеры</h2>
+<p>udp-эхо на 64 гц по loopback. приёмник работает внутри игровой бутылки так же, как сетевой код valve (<code>WSAEventSelect</code> + <code>recvfrom</code>). запущен deadlock, 110–120 с на прогон.</p>
+<table><thead><tr><th>приёмник</th><th>p99</th><th>максимум</th><th>опоздали &gt; 5 мс</th></tr></thead><tbody><tr><td>нативный</td><td>1.2 мс</td><td>8 мс</td><td>2 / 7040</td></tr><tr><td>wine, без фикса</td><td>6.1 мс</td><td>264 мс</td><td>80 / 7040</td></tr><tr><td>wine, с фиксом</td><td>3.1 мс</td><td>10 мс</td><td>18 / 7680</td></tr></tbody></table>
+<div class="bars"><span class="l">самый долгий фриз</span><span>до</span><i class="b" style="width:100%"></i><b>264 мс</b><span>после</span><i class="a" style="width:3.8%"></i><b>10 мс</b></div>
+<p>четыре фриза без фикса длились 232–264 мс, шли ровно через 30 с и заканчивались в пределах 7 мс от момента перезаписи <code>system.reg</code>.</p>
+<h2 id="фикс">фикс</h2>
+<p>в wineserver внедряется маленькая библиотека, которая перехватывает <code>open()</code>. когда начинается периодическая запись ветки больше 1 мб, а сервер занят (его доля cpu выше 5 %), открытие временного файла сразу завершается ошибкой. ветка остаётся изменённой, wineserver повторяет попытку через 30 с, и запись проходит, когда бутылка затихает. запись при выходе и запись маленьких веток вроде <code>user.reg</code> не затрагиваются.</p>
+<figure class="code"><figcaption>wineserver_fix.c</figcaption><pre><code>if (branch[0] &amp;&amp; periodic) {
+    double share = cpu_share();
+    if (busy_cpu &gt; 0 &amp;&amp; share &gt; busy_cpu) {  // идёт игра
+        errno = EACCES;                      // save_branch() отступает, ветка остаётся изменённой
+        return -1;
+    }
+}
+return open(path, flags, mode);</code></pre></figure>
+<h2 id="что-меняется-на-диске">что меняется на диске</h2>
+<ul><li><code>bin/wineserver</code> становится скриптом-обёрткой из 5 строк</li><li><code>bin/wineserver.orig</code> — нетронутый оригинал</li><li><code>bin/wineserver.real</code> — неподписанная копия: у подписанного файла включён hardened runtime, и он игнорирует <code>DYLD_INSERT_LIBRARIES</code></li><li><code>bin/wineserver_fix.dylib</code> — внедряемая библиотека</li></ul>
+<h2 id="проверка">проверка</h2>
+<p>поиграйте несколько минут и откройте журнал. во время игры каждые 30 с должна появляться строка <code>defer system.reg</code>.</p>
+<figure class="code"><pre><code>tail -f ~/Library/Logs/mgf/regsave.log</code></pre></figure>
+<h2 id="ограничения">ограничения</h2>
+<ul><li>лёгкая игра может не дотянуть до порога 5 %, и фризы останутся. уменьшите <code>порог занятости</code> в настройках и сверьтесь с журналом.</li><li>если wineserver убит, а не завершился сам, изменения реестра за время игры теряются. при обычном выходе они сохраняются.</li><li>обновление crossover или повторный патч cxpatcher удаляют обёртку. приложение применит её снова, если включено «применять фиксы заново».</li></ul>
+<div class="cta"><a class="btn primary" href="https://github.com/been-earth/mac-gaming-fixes/releases/latest"><svg
+  class="lucide lucide-arrow-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M5 12h14" />
+  <path d="m12 5 7 7-7 7" />
+</svg>скачать macgamingfixes</a><a class="btn" href="../ru/">все фиксы</a></div>
+</article>
+</main>
+<footer class="bottom"><div class="wrap">автор — илья новиков · <a href="mailto:contact@been.earth">contact@been.earth</a> · <a href="https://github.com/been-earth/mac-gaming-fixes/issues">issues</a> · <a href="https://github.com/been-earth/mac-gaming-fixes/blob/main/LICENSE">лицензия mit</a> · не связано с codeweavers, valve и apple.</div></footer>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>audio devices · MacGamingFixes</title>
+<meta name="description" content="wine follows the macos default devices. this card sets them without a trip to system settings and keeps a bluetooth headset from quietly becoming the…">
+<link rel="canonical" href="https://been-earth.github.io/mac-gaming-fixes/en/audio-devices.html">
+<link rel="alternate" hreflang="en" href="https://been-earth.github.io/mac-gaming-fixes/en/audio-devices.html">
+<link rel="alternate" hreflang="ru" href="https://been-earth.github.io/mac-gaming-fixes/ru/audio-devices.html">
+<link rel="alternate" hreflang="x-default" href="https://been-earth.github.io/mac-gaming-fixes/en/audio-devices.html">
+<link rel="icon" href="../icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="audio devices · MacGamingFixes">
+<meta property="og:description" content="wine follows the macos default devices. this card sets them without a trip to system settings and keeps a bluetooth headset from quietly becoming the…">
+<meta property="og:url" content="https://been-earth.github.io/mac-gaming-fixes/en/audio-devices.html">
+<meta property="og:image" content="https://been-earth.github.io/mac-gaming-fixes/social.png">
+<meta property="og:image:width" content="2560"><meta property="og:image:height" content="1280">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+@font-face { font-family: "Red Hat Mono"; font-weight: 300 700; src: url("../assets/RedHatMono.ttf"); font-display: swap; }
+:root { --page: #070b09; --card: #101813; --panel: #0c120e; --line: #1a251d; --line-strong: #28382d; --text: #e6efe8; --text-2: #a9b8ad; --muted: #7a8b7e; --accent: #39ff6e; --accent-dim: #1f6b38; --warning: #ffbd2e; }
+* { box-sizing: border-box; }
+html { background: var(--page); scroll-behavior: smooth; }
+body { margin: 0; font: 400 15px/1.6 "Red Hat Mono", ui-monospace, Menlo, monospace; color: var(--text-2); -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+code { font: inherit; font-size: 0.93em; padding: 1px 5px; border-radius: 4px; background: var(--card); border: 1px solid var(--line); color: var(--text); }
+pre { margin: 0; padding: 14px 16px; overflow-x: auto; font: 400 13px/1.55 "Red Hat Mono", ui-monospace, Menlo, monospace; color: var(--text); }
+pre code { padding: 0; border: 0; background: none; font-size: inherit; }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+header.top { position: sticky; top: 0; z-index: 2; background: rgba(7, 11, 9, .92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+header.top .wrap { display: flex; align-items: center; gap: 20px; height: 56px; }
+.brand { display: flex; align-items: center; gap: 10px; color: var(--text); font-weight: 500; letter-spacing: -0.02em; }
+.brand img { width: 28px; height: 28px; border-radius: 7px; }
+nav { display: flex; gap: 18px; margin-left: auto; font-size: 13px; }
+nav a { color: var(--text-2); } nav a.gh { color: var(--text); }
+h1 { margin: 0; font: 500 clamp(26px, 3.4vw, 40px)/1.2 "Red Hat Mono", ui-monospace, monospace; letter-spacing: -0.03em; color: var(--text); max-width: 900px; }
+h1 em { font-style: normal; color: var(--accent); white-space: nowrap; }
+h2 { margin: 0 0 8px; font: 500 clamp(22px, 2.4vw, 28px)/1.25 "Red Hat Mono", ui-monospace, monospace; letter-spacing: -0.03em; color: var(--text); }
+h3 { margin: 28px 0 8px; font: 500 17px/1.4 "Red Hat Mono", ui-monospace, monospace; color: var(--text); }
+section { padding: 56px 0; border-top: 1px solid var(--line); } section.hero { border: 0; padding: 72px 0 56px; }
+.lead { max-width: 820px; margin: 20px 0 28px; font-size: 16px; }
+.sub { margin: 0 0 28px; color: var(--muted); max-width: 820px; }
+.btns { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 16px; border-radius: 6px; font-size: 14px; font-weight: 500; border: 1px solid var(--line-strong); color: var(--text); background: var(--card); }
+.btn:hover { text-decoration: none; border-color: var(--accent-dim); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #06130a; } .btn.primary:hover { filter: brightness(1.08); }
+.btn svg { width: 16px; height: 16px; }
+.facts { margin: 18px 0 0; font-size: 13px; color: var(--muted); }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; } .grid.two { grid-template-columns: repeat(2, 1fr); }
+.card { display: flex; flex-direction: column; gap: 12px; padding: 18px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); }
+.card .t { display: flex; align-items: center; gap: 10px; color: var(--text); font-weight: 500; font-size: 16px; }
+.card .t svg { width: 20px; height: 20px; color: var(--accent); flex: none; }
+.card .use { color: var(--text); } .card .mech { font-size: 13px; color: var(--muted); }
+.card .more { margin-top: auto; font-size: 13px; }
+.bars { display: grid; grid-template-columns: auto 1fr auto; gap: 6px 10px; align-items: center; font-size: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
+.bars .l { grid-column: 1 / -1; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; font-size: 11px; }
+.bars i { display: block; height: 8px; border-radius: 2px; } .bars i.b { background: var(--warning); } .bars i.a { background: var(--accent); }
+.bars b { font-weight: 500; color: var(--text); white-space: nowrap; }
+.faq p { max-width: 820px; margin: 0; }
+ol.steps { margin: 20px 0 0; padding-left: 22px; max-width: 820px; } ol.steps li { margin: 8px 0; padding-left: 4px; }
+.note { max-width: 820px; } .note p { margin: 8px 0; }
+figure.code { margin: 16px 0; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); overflow: hidden; max-width: 820px; }
+figure.code figcaption { padding: 6px 16px; border-bottom: 1px solid var(--line); font-size: 12px; color: var(--muted); }
+aside.warn, aside.note-box { margin: 16px 0; padding: 12px 14px; border-left: 2px solid var(--warning); background: var(--card); border-radius: 0 6px 6px 0; max-width: 820px; }
+aside.warn::before { content: "[WARN] "; color: var(--warning); }
+footer.bottom { padding: 32px 0 48px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+article { max-width: 820px; padding: 48px 0; } article h1 { font-size: clamp(26px, 3vw, 34px); } article .meta { margin: 8px 0 32px; font-size: 13px; color: var(--muted); }
+article h2 { margin: 36px 0 10px; font-size: 20px; } article p { margin: 10px 0; } article ul { padding-left: 22px; } article li { margin: 4px 0; }
+article table { border-collapse: collapse; margin: 16px 0; font-size: 13px; width: 100%; max-width: 820px; }
+article th, article td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--line); vertical-align: top; } article th { color: var(--muted); font-weight: 500; }
+article .bars { max-width: 480px; margin: 16px 0; padding: 12px 14px; border: 1px solid var(--line); border-radius: 6px; background: var(--card); }
+.crumbs { font-size: 13px; color: var(--muted); margin-bottom: 24px; } .crumbs a { color: var(--text-2); }
+.cta { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+@media (max-width: 860px) { .grid, .grid.two { grid-template-columns: 1fr; } nav .hide { display: none; } section { padding: 40px 0; } section.hero { padding: 48px 0 40px; } }
+</style>
+
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="../"><img src="../icon.png" alt="">MacGamingFixes</a>
+  <nav><a class="hide" href="../">all fixes</a><a href="../ru/audio-devices.html" hreflang="ru">по-русски</a><a class="gh" href="https://github.com/been-earth/mac-gaming-fixes">github ↗</a></nav>
+</div></header>
+<main class="wrap">
+<article>
+<div class="crumbs"><a href="../">macgamingfixes</a> / audio devices</div>
+<h1>audio devices</h1>
+<p class="meta">part of macgamingfixes. the same article is in the app, next to the switch.</p>
+<p>wine follows the macos default devices. this card sets them without a trip to system settings and keeps a bluetooth headset from quietly becoming the microphone.</p>
+<h2 id="what-it-does">what it does</h2>
+<ul><li>sets the system output device</li><li>sets the system input device</li><li>sets the input volume of the chosen microphone</li></ul>
+<h2 id="how-it-works">how it works</h2>
+<p>all three are coreaudio properties: two on the system object, one on the device. the lists refresh when a device connects or the default changes.</p>
+<figure class="code"><figcaption>CoreAudio</figcaption><pre><code>kAudioHardwarePropertyDefaultOutputDevice   // output
+kAudioHardwarePropertyDefaultInputDevice    // microphone
+kAudioDevicePropertyVolumeScalar            // input volume, input scope</code></pre></figure>
+<h2 id="the-bluetooth-trap">the bluetooth trap</h2>
+<p>when a bluetooth headset connects, macos often makes its microphone the default input. the first app that opens that microphone switches the headset to its 16 khz mono call profile, and game audio turns to phone quality. the card warns when the selected input is a bluetooth device.</p>
+<h2 id="limits">limits</h2>
+<ul><li>some devices have no software input volume. the slider is hidden for those.</li><li>macos may switch devices again when a headset reconnects. the card shows the change but does not undo it.</li></ul>
+<div class="cta"><a class="btn primary" href="https://github.com/been-earth/mac-gaming-fixes/releases/latest"><svg
+  class="lucide lucide-arrow-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M5 12h14" />
+  <path d="m12 5 7 7-7 7" />
+</svg>download macgamingfixes</a><a class="btn" href="../">all fixes</a></div>
+</article>
+</main>
+<footer class="bottom"><div class="wrap">made by ilia novikov · <a href="mailto:contact@been.earth">contact@been.earth</a> · <a href="https://github.com/been-earth/mac-gaming-fixes/issues">issues</a> · <a href="https://github.com/been-earth/mac-gaming-fixes/blob/main/LICENSE">mit license</a> · not affiliated with codeweavers, valve or apple.</div></footer>
+</body>
+</html>

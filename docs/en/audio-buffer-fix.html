@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>audio buffer fix · MacGamingFixes</title>
+<meta name="description" content="games under crossover crackle unless the output device runs at 88.2 or 96 khz, and bluetooth and most usb devices cannot. the sample rate was never the…">
+<link rel="canonical" href="https://been-earth.github.io/mac-gaming-fixes/en/audio-buffer-fix.html">
+<link rel="alternate" hreflang="en" href="https://been-earth.github.io/mac-gaming-fixes/en/audio-buffer-fix.html">
+<link rel="alternate" hreflang="ru" href="https://been-earth.github.io/mac-gaming-fixes/ru/audio-buffer-fix.html">
+<link rel="alternate" hreflang="x-default" href="https://been-earth.github.io/mac-gaming-fixes/en/audio-buffer-fix.html">
+<link rel="icon" href="../icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="audio buffer fix · MacGamingFixes">
+<meta property="og:description" content="games under crossover crackle unless the output device runs at 88.2 or 96 khz, and bluetooth and most usb devices cannot. the sample rate was never the…">
+<meta property="og:url" content="https://been-earth.github.io/mac-gaming-fixes/en/audio-buffer-fix.html">
+<meta property="og:image" content="https://been-earth.github.io/mac-gaming-fixes/social.png">
+<meta property="og:image:width" content="2560"><meta property="og:image:height" content="1280">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+@font-face { font-family: "Red Hat Mono"; font-weight: 300 700; src: url("../assets/RedHatMono.ttf"); font-display: swap; }
+:root { --page: #070b09; --card: #101813; --panel: #0c120e; --line: #1a251d; --line-strong: #28382d; --text: #e6efe8; --text-2: #a9b8ad; --muted: #7a8b7e; --accent: #39ff6e; --accent-dim: #1f6b38; --warning: #ffbd2e; }
+* { box-sizing: border-box; }
+html { background: var(--page); scroll-behavior: smooth; }
+body { margin: 0; font: 400 15px/1.6 "Red Hat Mono", ui-monospace, Menlo, monospace; color: var(--text-2); -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+code { font: inherit; font-size: 0.93em; padding: 1px 5px; border-radius: 4px; background: var(--card); border: 1px solid var(--line); color: var(--text); }
+pre { margin: 0; padding: 14px 16px; overflow-x: auto; font: 400 13px/1.55 "Red Hat Mono", ui-monospace, Menlo, monospace; color: var(--text); }
+pre code { padding: 0; border: 0; background: none; font-size: inherit; }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+header.top { position: sticky; top: 0; z-index: 2; background: rgba(7, 11, 9, .92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+header.top .wrap { display: flex; align-items: center; gap: 20px; height: 56px; }
+.brand { display: flex; align-items: center; gap: 10px; color: var(--text); font-weight: 500; letter-spacing: -0.02em; }
+.brand img { width: 28px; height: 28px; border-radius: 7px; }
+nav { display: flex; gap: 18px; margin-left: auto; font-size: 13px; }
+nav a { color: var(--text-2); } nav a.gh { color: var(--text); }
+h1 { margin: 0; font: 500 clamp(26px, 3.4vw, 40px)/1.2 "Red Hat Mono", ui-monospace, monospace; letter-spacing: -0.03em; color: var(--text); max-width: 900px; }
+h1 em { font-style: normal; color: var(--accent); white-space: nowrap; }
+h2 { margin: 0 0 8px; font: 500 clamp(22px, 2.4vw, 28px)/1.25 "Red Hat Mono", ui-monospace, monospace; letter-spacing: -0.03em; color: var(--text); }
+h3 { margin: 28px 0 8px; font: 500 17px/1.4 "Red Hat Mono", ui-monospace, monospace; color: var(--text); }
+section { padding: 56px 0; border-top: 1px solid var(--line); } section.hero { border: 0; padding: 72px 0 56px; }
+.lead { max-width: 820px; margin: 20px 0 28px; font-size: 16px; }
+.sub { margin: 0 0 28px; color: var(--muted); max-width: 820px; }
+.btns { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 16px; border-radius: 6px; font-size: 14px; font-weight: 500; border: 1px solid var(--line-strong); color: var(--text); background: var(--card); }
+.btn:hover { text-decoration: none; border-color: var(--accent-dim); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #06130a; } .btn.primary:hover { filter: brightness(1.08); }
+.btn svg { width: 16px; height: 16px; }
+.facts { margin: 18px 0 0; font-size: 13px; color: var(--muted); }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; } .grid.two { grid-template-columns: repeat(2, 1fr); }
+.card { display: flex; flex-direction: column; gap: 12px; padding: 18px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); }
+.card .t { display: flex; align-items: center; gap: 10px; color: var(--text); font-weight: 500; font-size: 16px; }
+.card .t svg { width: 20px; height: 20px; color: var(--accent); flex: none; }
+.card .use { color: var(--text); } .card .mech { font-size: 13px; color: var(--muted); }
+.card .more { margin-top: auto; font-size: 13px; }
+.bars { display: grid; grid-template-columns: auto 1fr auto; gap: 6px 10px; align-items: center; font-size: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
+.bars .l { grid-column: 1 / -1; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; font-size: 11px; }
+.bars i { display: block; height: 8px; border-radius: 2px; } .bars i.b { background: var(--warning); } .bars i.a { background: var(--accent); }
+.bars b { font-weight: 500; color: var(--text); white-space: nowrap; }
+.faq p { max-width: 820px; margin: 0; }
+ol.steps { margin: 20px 0 0; padding-left: 22px; max-width: 820px; } ol.steps li { margin: 8px 0; padding-left: 4px; }
+.note { max-width: 820px; } .note p { margin: 8px 0; }
+figure.code { margin: 16px 0; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); overflow: hidden; max-width: 820px; }
+figure.code figcaption { padding: 6px 16px; border-bottom: 1px solid var(--line); font-size: 12px; color: var(--muted); }
+aside.warn, aside.note-box { margin: 16px 0; padding: 12px 14px; border-left: 2px solid var(--warning); background: var(--card); border-radius: 0 6px 6px 0; max-width: 820px; }
+aside.warn::before { content: "[WARN] "; color: var(--warning); }
+footer.bottom { padding: 32px 0 48px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+article { max-width: 820px; padding: 48px 0; } article h1 { font-size: clamp(26px, 3vw, 34px); } article .meta { margin: 8px 0 32px; font-size: 13px; color: var(--muted); }
+article h2 { margin: 36px 0 10px; font-size: 20px; } article p { margin: 10px 0; } article ul { padding-left: 22px; } article li { margin: 4px 0; }
+article table { border-collapse: collapse; margin: 16px 0; font-size: 13px; width: 100%; max-width: 820px; }
+article th, article td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--line); vertical-align: top; } article th { color: var(--muted); font-weight: 500; }
+article .bars { max-width: 480px; margin: 16px 0; padding: 12px 14px; border: 1px solid var(--line); border-radius: 6px; background: var(--card); }
+.crumbs { font-size: 13px; color: var(--muted); margin-bottom: 24px; } .crumbs a { color: var(--text-2); }
+.cta { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+@media (max-width: 860px) { .grid, .grid.two { grid-template-columns: 1fr; } nav .hide { display: none; } section { padding: 40px 0; } section.hero { padding: 48px 0 40px; } }
+</style>
+
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="../"><img src="../icon.png" alt="">MacGamingFixes</a>
+  <nav><a class="hide" href="../">all fixes</a><a href="../ru/audio-buffer-fix.html" hreflang="ru">по-русски</a><a class="gh" href="https://github.com/been-earth/mac-gaming-fixes">github ↗</a></nav>
+</div></header>
+<main class="wrap">
+<article>
+<div class="crumbs"><a href="../">macgamingfixes</a> / audio buffer fix</div>
+<h1>audio buffer fix</h1>
+<p class="meta">part of macgamingfixes. the same article is in the app, next to the switch.</p>
+<p>games under crossover crackle unless the output device runs at 88.2 or 96 khz, and bluetooth and most usb devices cannot. the sample rate was never the problem. the buffer length is, and that can be fixed at any rate.</p>
+<h2 id="symptom">symptom</h2>
+<p>crackle in game audio and a choppy microphone in voice chat. the usual advice is to set the device to 96 khz in audio midi setup. a bluetooth headset offers 44.1 khz only, a usb microphone 44.1 or 48.</p>
+<h2 id="cause">cause</h2>
+<p>wine wakes the game every 10 ms and the engine keeps one or two such periods queued. coreaudio pulls 512 frames per io cycle: 11.6 ms at 44.1 khz, 10.7 ms at 48 khz. that is longer than one period, so the queue runs dry and wine pads the gap with silence. at 96 khz the same 512 frames last 5.3 ms and the queue never empties.</p>
+<p>capture has the mirror problem: wine hands out one 10 ms packet per io cycle and drops the surplus.</p>
+<h2 id="measurement">measurement</h2>
+<p>a probe that plays and records the way sdl does, 15 s per run. playback counts inserted silence, capture counts missing audio.</p>
+<table><thead><tr><th>device</th><th>stock</th><th>fixed</th></tr></thead><tbody><tr><td>bluetooth headset, 44.1 khz</td><td>6.0–6.3 %</td><td>0.1 %</td></tr><tr><td>usb output, 48 khz</td><td>1.8–2.2 %</td><td>0.1–0.2 %</td></tr><tr><td>built-in speakers, 48 khz</td><td>1.8–2.2 %</td><td>0.0–0.1 %</td></tr><tr><td>built-in speakers, 96 khz</td><td>0.1 %</td><td>n/a</td></tr><tr><td>usb microphone, 48 khz</td><td>6.9 %</td><td>0.2 %</td></tr><tr><td>usb microphone, 44.1 khz</td><td>6.4 %</td><td>0.1 %</td></tr></tbody></table>
+<div class="bars"><span class="l">silence inserted, bluetooth headset</span><span>before</span><i class="b" style="width:100%"></i><b>6.3 %</b><span>after</span><i class="a" style="width:2.0%"></i><b>0.1 %</b></div>
+<p>setting the microphone to 44.1 khz, the other half of the usual advice, did not help: 44.1 khz lost as much as 48.</p>
+<h2 id="the-fix">the fix</h2>
+<p>the io buffer size is a per-process setting, so it has to be set from inside the game. a wrapper replaces wine's <code>winecoreaudio.so</code>, re-exports the real driver, and on load asks coreaudio for a 5.33 ms buffer on every device: 256 frames at 48 khz, 235 at 44.1.</p>
+<figure class="code"><figcaption>coreaudio_iobuf.c</figcaption><pre><code>Float64 hz;                          // the device&#x27;s current rate
+UInt32 frames = hz * io_ms / 1000;   // 5.33 ms at any rate
+AudioObjectSetPropertyData(device, &amp;buffer_frame_size,
+                           0, NULL, sizeof frames, &amp;frames);</code></pre></figure>
+<h2 id="what-changes-on-disk">what changes on disk</h2>
+<ul><li><code>lib/wine/x86_64-unix/winecoreaudio.so</code> becomes the wrapper</li><li><code>winecoreaudio.so.orig</code> is the untouched original</li><li><code>winecoreaudio_real.so</code> is the copy the wrapper loads</li><li><code>mgf_audio_io_ms</code> holds the buffer length: wine processes are started by crossover, so there is no environment to pass it through</li></ul>
+<h2 id="limits">limits</h2>
+<ul><li>applies to wine processes started after the change. restart steam and the game.</li><li>if a bluetooth headset's own microphone is the input, macos drops the headset to 16 khz mono. no buffer setting fixes that. pick another microphone under audio devices.</li><li><code>audio io buffer</code> in settings changes the length. 0 restores coreaudio's default.</li></ul>
+<div class="cta"><a class="btn primary" href="https://github.com/been-earth/mac-gaming-fixes/releases/latest"><svg
+  class="lucide lucide-arrow-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M5 12h14" />
+  <path d="m12 5 7 7-7 7" />
+</svg>download macgamingfixes</a><a class="btn" href="../">all fixes</a></div>
+</article>
+</main>
+<footer class="bottom"><div class="wrap">made by ilia novikov · <a href="mailto:contact@been.earth">contact@been.earth</a> · <a href="https://github.com/been-earth/mac-gaming-fixes/issues">issues</a> · <a href="https://github.com/been-earth/mac-gaming-fixes/blob/main/LICENSE">mit license</a> · not affiliated with codeweavers, valve or apple.</div></footer>
+</body>
+</html>

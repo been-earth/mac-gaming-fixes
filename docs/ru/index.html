@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MacGamingFixes: лаги, net jitter и треск звука в играх через CrossOver на Mac</title>
+<meta name="description" content="Бесплатное приложение для macOS на Apple silicon: убирает лаги каждые 30 секунд, net jitter по Wi-Fi, треск звука и заикающийся микрофон в CS2, Deadlock и других Windows-играх через CrossOver. Плюс F1–F12 без Fn и быстрый выбор аудиоустройств.">
+<link rel="canonical" href="https://been-earth.github.io/mac-gaming-fixes/ru/index.html">
+<link rel="alternate" hreflang="en" href="https://been-earth.github.io/mac-gaming-fixes/index.html">
+<link rel="alternate" hreflang="ru" href="https://been-earth.github.io/mac-gaming-fixes/ru/index.html">
+<link rel="alternate" hreflang="x-default" href="https://been-earth.github.io/mac-gaming-fixes/index.html">
+<link rel="icon" href="../icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MacGamingFixes: лаги, net jitter и треск звука в играх через CrossOver на Mac">
+<meta property="og:description" content="Бесплатное приложение для macOS на Apple silicon: убирает лаги каждые 30 секунд, net jitter по Wi-Fi, треск звука и заикающийся микрофон в CS2, Deadlock и других Windows-играх через CrossOver. Плюс F1–F12 без Fn и быстрый выбор аудиоустройств.">
+<meta property="og:url" content="https://been-earth.github.io/mac-gaming-fixes/ru/index.html">
+<meta property="og:image" content="https://been-earth.github.io/mac-gaming-fixes/social.png">
+<meta property="og:image:width" content="2560"><meta property="og:image:height" content="1280">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+@font-face { font-family: "Red Hat Mono"; font-weight: 300 700; src: url("../assets/RedHatMono.ttf"); font-display: swap; }
+:root { --page: #070b09; --card: #101813; --panel: #0c120e; --line: #1a251d; --line-strong: #28382d; --text: #e6efe8; --text-2: #a9b8ad; --muted: #7a8b7e; --accent: #39ff6e; --accent-dim: #1f6b38; --warning: #ffbd2e; }
+* { box-sizing: border-box; }
+html { background: var(--page); scroll-behavior: smooth; }
+body { margin: 0; font: 400 15px/1.6 "Red Hat Mono", ui-monospace, Menlo, monospace; color: var(--text-2); -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+code { font: inherit; font-size: 0.93em; padding: 1px 5px; border-radius: 4px; background: var(--card); border: 1px solid var(--line); color: var(--text); }
+pre { margin: 0; padding: 14px 16px; overflow-x: auto; font: 400 13px/1.55 "Red Hat Mono", ui-monospace, Menlo, monospace; color: var(--text); }
+pre code { padding: 0; border: 0; background: none; font-size: inherit; }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+header.top { position: sticky; top: 0; z-index: 2; background: rgba(7, 11, 9, .92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+header.top .wrap { display: flex; align-items: center; gap: 20px; height: 56px; }
+.brand { display: flex; align-items: center; gap: 10px; color: var(--text); font-weight: 500; letter-spacing: -0.02em; }
+.brand img { width: 28px; height: 28px; border-radius: 7px; }
+nav { display: flex; gap: 18px; margin-left: auto; font-size: 13px; }
+nav a { color: var(--text-2); } nav a.gh { color: var(--text); }
+h1 { margin: 0; font: 500 clamp(26px, 3.4vw, 40px)/1.2 "Red Hat Mono", ui-monospace, monospace; letter-spacing: -0.03em; color: var(--text); max-width: 900px; }
+h1 em { font-style: normal; color: var(--accent); white-space: nowrap; }
+h2 { margin: 0 0 8px; font: 500 clamp(22px, 2.4vw, 28px)/1.25 "Red Hat Mono", ui-monospace, monospace; letter-spacing: -0.03em; color: var(--text); }
+h3 { margin: 28px 0 8px; font: 500 17px/1.4 "Red Hat Mono", ui-monospace, monospace; color: var(--text); }
+section { padding: 56px 0; border-top: 1px solid var(--line); } section.hero { border: 0; padding: 72px 0 56px; }
+.lead { max-width: 820px; margin: 20px 0 28px; font-size: 16px; }
+.sub { margin: 0 0 28px; color: var(--muted); max-width: 820px; }
+.btns { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 16px; border-radius: 6px; font-size: 14px; font-weight: 500; border: 1px solid var(--line-strong); color: var(--text); background: var(--card); }
+.btn:hover { text-decoration: none; border-color: var(--accent-dim); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #06130a; } .btn.primary:hover { filter: brightness(1.08); }
+.btn svg { width: 16px; height: 16px; }
+.facts { margin: 18px 0 0; font-size: 13px; color: var(--muted); }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; } .grid.two { grid-template-columns: repeat(2, 1fr); }
+.card { display: flex; flex-direction: column; gap: 12px; padding: 18px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); }
+.card .t { display: flex; align-items: center; gap: 10px; color: var(--text); font-weight: 500; font-size: 16px; }
+.card .t svg { width: 20px; height: 20px; color: var(--accent); flex: none; }
+.card .use { color: var(--text); } .card .mech { font-size: 13px; color: var(--muted); }
+.card .more { margin-top: auto; font-size: 13px; }
+.bars { display: grid; grid-template-columns: auto 1fr auto; gap: 6px 10px; align-items: center; font-size: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
+.bars .l { grid-column: 1 / -1; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; font-size: 11px; }
+.bars i { display: block; height: 8px; border-radius: 2px; } .bars i.b { background: var(--warning); } .bars i.a { background: var(--accent); }
+.bars b { font-weight: 500; color: var(--text); white-space: nowrap; }
+.faq p { max-width: 820px; margin: 0; }
+ol.steps { margin: 20px 0 0; padding-left: 22px; max-width: 820px; } ol.steps li { margin: 8px 0; padding-left: 4px; }
+.note { max-width: 820px; } .note p { margin: 8px 0; }
+figure.code { margin: 16px 0; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); overflow: hidden; max-width: 820px; }
+figure.code figcaption { padding: 6px 16px; border-bottom: 1px solid var(--line); font-size: 12px; color: var(--muted); }
+aside.warn, aside.note-box { margin: 16px 0; padding: 12px 14px; border-left: 2px solid var(--warning); background: var(--card); border-radius: 0 6px 6px 0; max-width: 820px; }
+aside.warn::before { content: "[WARN] "; color: var(--warning); }
+footer.bottom { padding: 32px 0 48px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+article { max-width: 820px; padding: 48px 0; } article h1 { font-size: clamp(26px, 3vw, 34px); } article .meta { margin: 8px 0 32px; font-size: 13px; color: var(--muted); }
+article h2 { margin: 36px 0 10px; font-size: 20px; } article p { margin: 10px 0; } article ul { padding-left: 22px; } article li { margin: 4px 0; }
+article table { border-collapse: collapse; margin: 16px 0; font-size: 13px; width: 100%; max-width: 820px; }
+article th, article td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--line); vertical-align: top; } article th { color: var(--muted); font-weight: 500; }
+article .bars { max-width: 480px; margin: 16px 0; padding: 12px 14px; border: 1px solid var(--line); border-radius: 6px; background: var(--card); }
+.crumbs { font-size: 13px; color: var(--muted); margin-bottom: 24px; } .crumbs a { color: var(--text-2); }
+.cta { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+@media (max-width: 860px) { .grid, .grid.two { grid-template-columns: 1fr; } nav .hide { display: none; } section { padding: 40px 0; } section.hero { padding: 48px 0 40px; } }
+</style>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "MacGamingFixes", "operatingSystem": "macOS 14 or later, Apple silicon", "applicationCategory": "UtilitiesApplication", "softwareVersion": "0.1.1", "license": "https://github.com/been-earth/mac-gaming-fixes/blob/main/LICENSE", "url": "https://been-earth.github.io/mac-gaming-fixes/", "downloadUrl": "https://github.com/been-earth/mac-gaming-fixes/releases/latest", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "description": "Бесплатное приложение для macOS на Apple silicon: убирает лаги каждые 30 секунд, net jitter по Wi-Fi, треск звука и заикающийся микрофон в CS2, Deadlock и других Windows-играх через CrossOver. Плюс F1–F12 без Fn и быстрый выбор аудиоустройств.", "author": {"@type": "Person", "name": "Ilia Novikov", "email": "contact@been.earth"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "cs2 или deadlock лагает каждые 30 секунд на mac (crossover, steam)", "acceptedAnswer": {"@type": "Answer", "text": "ровный fps, а потом рывок как по часам каждые 30 секунд, и график сети или телеметрия deadlock в тот же момент показывает всплеск джиттера. это запись реестра wine, а не сеть и не видеокарта: сервер wine переписывает system.reg (12 мб в бутылке steam), и каждый процесс бутылки ждёт около 240 мс. снижение графики не помогает; отсрочка записи реестра убирает фриз."}}, {"@type": "Question", "name": "высокий net jitter или потери пакетов в cs2 на mac по wi-fi", "acceptedAnswer": {"@type": "Answer", "text": "это две разные вещи. джиттер, который виден только на mac при в целом нормальном соединении, — обычно энергосбережение чипа wi-fi: он придерживает пакеты до 25 мс, пока какой-нибудь сокет не попросит класс реального времени; нативные игры просят, wine — нет. wi-fi без задержек чинит эту часть. потери пакетов за роутером (провайдер, игровой релей) к mac не относятся, и здесь их ничто не исправит; чтобы отличить одно от другого, сделайте ping до роутера, а потом до релея. игра от батареи добавляет сверху всплески по 100 мс и больше: подключите зарядку."}}, {"@type": "Question", "name": "треск и щелчки звука в играх через crossover; микрофон заикается в discord или голосовом чате", "acceptedAnswer": {"@type": "Answer", "text": "обычный совет — выставить устройству вывода 96 кгц в audio midi setup. он работает потому, что на 96 кгц блок coreaudio в 512 кадров короче 10-мс аудиопериода wine. bluetooth-гарнитуры и большинство usb-микрофонов 96 кгц не умеют, поэтому на 44.1 и 48 кгц в воспроизведение вставляется тишина, а микрофон теряет около 7 % сказанного. фикс аудиобуфера просит у coreaudio короткий блок на любой частоте, и устройство на 96 кгц больше не нужно. отдельная ловушка: когда macos выбирает входом микрофон самой bluetooth-гарнитуры, она переходит в 16 кгц моно; инструмент аудиоустройства об этом предупреждает."}}, {"@type": "Question", "name": "f1–f12 не работают в играх на macbook без fn", "acceptedAnswer": {"@type": "Answer", "text": "в macos есть этот переключатель (клавиатура → «использовать клавиши f1, f2 и др. как стандартные функциональные»), но он спрятан и ручной. функциональные клавиши переключают его сразу: вручную или автоматически, пока запущена выбранная игра или включён игровой режим macos."}}, {"@type": "Question", "name": "работает ли с whisky, game porting toolkit, parallels и нативными играми steam?", "acceptedAnswer": {"@type": "Answer", "text": "пока нет. приложение патчит только пакет crossover (проверено на crossover 26). у whisky и game porting toolkit та же раскладка wine, но версия старее (7.7 против 11 в crossover), так что как минимум аудио-обёртке нужна своя сборка. parallels — виртуальная машина, не wine. у нативных mac-игр (например, dota 2) этих проблем никогда не было. нужна поддержка whisky — откройте issue или напишите на contact@been.earth."}}, {"@type": "Question", "name": "какие игры и какие mac?", "acceptedAnswer": {"@type": "Answer", "text": "фиксы действуют на бутылку, а не на игру: их получает всё в той же бутылке crossover, а бутылка steam обычно содержит все ваши игры. замерено с deadlock; cs2 работает в той же бутылке. пока одна машина: macbook pro m3 max, macos 27, crossover 26.0. только apple silicon."}}]}]</script>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="../ru/"><img src="../icon.png" alt="">MacGamingFixes</a>
+  <nav><a class="hide" href="#fixes">фиксы</a><a class="hide" href="#faq">это про меня?</a><a class="hide" href="#install">установка</a><a href="../index.html" hreflang="en">in english</a><a class="gh" href="https://github.com/been-earth/mac-gaming-fixes">github ↗</a></nav>
+</div></header>
+<main class="wrap">
+<section class="hero">
+  <h1>windows-игры в crossover на mac. без <em>лагов</em>, без <em>net jitter</em>, без <em>треска звука</em>.</h1>
+  <p class="lead">cs2, deadlock и любая другая windows-игра через crossover приносят три проблемы, которые не лечатся ни настройками игры, ни настройками macos: игра дёргается каждые 30 секунд, по wi-fi постоянный net jitter, звук трещит, а микрофон заикается в голосовом чате. macgamingfixes — маленькое бесплатное приложение для macos, которое убирает все три патчем wine внутри crossover. каждый фикс — переключатель; выключили — оригинальные файлы вернулись на место.</p>
+  <div class="btns"><a class="btn primary" href="https://github.com/been-earth/mac-gaming-fixes/releases/latest"><svg
+  class="lucide lucide-arrow-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M5 12h14" />
+  <path d="m12 5 7 7-7 7" />
+</svg>скачать 0.1.1 · dmg</a><a class="btn" href="https://github.com/been-earth/mac-gaming-fixes"><svg
+  class="lucide lucide-git-fork"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="18" r="3" />
+  <circle cx="6" cy="6" r="3" />
+  <circle cx="18" cy="6" r="3" />
+  <path d="M18 9v2c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V9" />
+  <path d="M12 12v3" />
+</svg>исходники на github</a></div>
+  <p class="facts">apple silicon · macos 14+ · crossover 26 · лицензия mit · русский и английский</p>
+</section>
+<section id="fixes"><h2>три фикса внутри crossover</h2><p class="sub">замерено на одном macbook pro m3 max с crossover 26.0 и deadlock. каждая карточка открывает статью с методом и цифрами.</p><div class="grid"><div class="card"><div class="t"><svg
+  class="lucide lucide-save-off"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M13 13H8a1 1 0 0 0-1 1v7" />
+  <path d="M14 8h1" />
+  <path d="M17 21v-4" />
+  <path d="m2 2 20 20" />
+  <path d="M20.41 20.41A2 2 0 0 1 19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 .59-1.41" />
+  <path d="M9 3h6.2a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V15" />
+</svg>отсрочка записи реестра</div><p class="use">wine дважды в минуту замораживает все процессы бутылки примерно на четверть секунды, чтобы переписать реестр. этот фикс придерживает запись, пока идёт игра.</p><div class="bars"><span class="l">самый долгий фриз</span><span>до</span><i class="b" style="width:100%"></i><b>264 мс</b><span>после</span><i class="a" style="width:3.8%"></i><b>10 мс</b></div><a class="more" href="ru/registry-save-deferral.html">как это работает →</a></div><div class="card"><div class="t"><svg
+  class="lucide lucide-wifi"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 20h.01" />
+  <path d="M2 8.82a15 15 0 0 1 20 0" />
+  <path d="M5 12.859a10 10 0 0 1 14 0" />
+  <path d="M8.5 16.429a5 5 0 0 1 7 0" />
+</svg>wi-fi без задержек</div><p class="use">чип wi-fi в mac может придерживать пакеты до 25 мс ради экономии энергии. он перестаёт это делать, когда какой-нибудь сокет запрашивает обслуживание реального времени. wine его не запрашивает, поэтому запрашивает этот фикс.</p><div class="bars"><span class="l">медиана до роутера</span><span>до</span><i class="b" style="width:100%"></i><b>8.7 мс</b><span>после</span><i class="a" style="width:43.7%"></i><b>3.8 мс</b></div><a class="more" href="ru/low-latency-wifi.html">как это работает →</a></div><div class="card"><div class="t"><svg
+  class="lucide lucide-audio-lines"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M2 10v3" />
+  <path d="M6 6v11" />
+  <path d="M10 3v18" />
+  <path d="M14 8v7" />
+  <path d="M18 5v13" />
+  <path d="M22 10v3" />
+</svg>фикс аудиобуфера</div><p class="use">игры под crossover трещат, если устройство вывода не работает на 88.2 или 96 кгц, а bluetooth и большинство usb-устройств так не умеют. дело никогда не было в частоте. дело в длине буфера, и её можно исправить на любой частоте.</p><div class="bars"><span class="l">вставлено тишины, bluetooth-гарнитура</span><span>до</span><i class="b" style="width:100%"></i><b>6.3 %</b><span>после</span><i class="a" style="width:2.0%"></i><b>0.1 %</b></div><a class="more" href="ru/audio-buffer-fix.html">как это работает →</a></div></div></section>
+<section id="faq" class="faq"><h2>это про меня?</h2><h3>cs2 или deadlock лагает каждые 30 секунд на mac (crossover, steam)</h3><p>ровный fps, а потом рывок как по часам каждые 30 секунд, и график сети или телеметрия deadlock в тот же момент показывает всплеск джиттера. это запись реестра wine, а не сеть и не видеокарта: сервер wine переписывает <code>system.reg</code> (12 мб в бутылке steam), и каждый процесс бутылки ждёт около 240 мс. снижение графики не помогает; <a href="registry-save-deferral.html">отсрочка записи реестра</a> убирает фриз.</p><h3>высокий net jitter или потери пакетов в cs2 на mac по wi-fi</h3><p>это две разные вещи. джиттер, который виден только на mac при в целом нормальном соединении, — обычно энергосбережение чипа wi-fi: он придерживает пакеты до 25 мс, пока какой-нибудь сокет не попросит класс реального времени; нативные игры просят, wine — нет. <a href="low-latency-wifi.html">wi-fi без задержек</a> чинит эту часть. потери пакетов за роутером (провайдер, игровой релей) к mac не относятся, и здесь их ничто не исправит; чтобы отличить одно от другого, сделайте <code>ping</code> до роутера, а потом до релея. игра от батареи добавляет сверху всплески по 100 мс и больше: подключите зарядку.</p><h3>треск и щелчки звука в играх через crossover; микрофон заикается в discord или голосовом чате</h3><p>обычный совет — выставить устройству вывода 96 кгц в audio midi setup. он работает потому, что на 96 кгц блок coreaudio в 512 кадров короче 10-мс аудиопериода wine. bluetooth-гарнитуры и большинство usb-микрофонов 96 кгц не умеют, поэтому на 44.1 и 48 кгц в воспроизведение вставляется тишина, а микрофон теряет около 7 % сказанного. <a href="audio-buffer-fix.html">фикс аудиобуфера</a> просит у coreaudio короткий блок на любой частоте, и устройство на 96 кгц больше не нужно. отдельная ловушка: когда macos выбирает входом микрофон самой bluetooth-гарнитуры, она переходит в 16 кгц моно; инструмент <a href="audio-devices.html">аудиоустройства</a> об этом предупреждает.</p><h3>f1–f12 не работают в играх на macbook без fn</h3><p>в macos есть этот переключатель (клавиатура → «использовать клавиши f1, f2 и др. как стандартные функциональные»), но он спрятан и ручной. <a href="function-keys.html">функциональные клавиши</a> переключают его сразу: вручную или автоматически, пока запущена выбранная игра или включён игровой режим macos.</p><h3>работает ли с whisky, game porting toolkit, parallels и нативными играми steam?</h3><p>пока нет. приложение патчит только пакет crossover (проверено на crossover 26). у whisky и game porting toolkit та же раскладка wine, но версия старее (7.7 против 11 в crossover), так что как минимум аудио-обёртке нужна своя сборка. parallels — виртуальная машина, не wine. у нативных mac-игр (например, dota 2) этих проблем никогда не было. нужна поддержка whisky — <a href="https://github.com/been-earth/mac-gaming-fixes/issues">откройте issue</a> или напишите на contact@been.earth.</p><h3>какие игры и какие mac?</h3><p>фиксы действуют на бутылку, а не на игру: их получает всё в той же бутылке crossover, а бутылка steam обычно содержит все ваши игры. замерено с deadlock; cs2 работает в той же бутылке. пока одна машина: macbook pro m3 max, macos 27, crossover 26.0. только apple silicon.</p></section>
+<section id="tools"><h2>два инструмента для macos</h2><p class="sub">они меняют обычные настройки macos, а не crossover, и действуют сразу.</p><div class="grid two"><div class="card"><div class="t"><svg
+  class="lucide lucide-keyboard"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M10 8h.01" />
+  <path d="M12 12h.01" />
+  <path d="M14 8h.01" />
+  <path d="M16 12h.01" />
+  <path d="M18 8h.01" />
+  <path d="M6 8h.01" />
+  <path d="M7 16h10" />
+  <path d="M8 12h.01" />
+  <rect width="20" height="16" x="2" y="4" rx="2" />
+</svg>функциональные клавиши</div><p class="use">игры используют f1–f12. macbook вместо них отправляет клавиши яркости и медиа, пока не зажат fn. этот переключатель меняет поведение верхнего ряда мгновенно — вручную или при запуске игры.</p><a class="more" href="ru/function-keys.html">как это работает →</a></div><div class="card"><div class="t"><svg
+  class="lucide lucide-headphones"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3" />
+</svg>аудиоустройства</div><p class="use">wine использует устройства macos по умолчанию. эта карточка выбирает их без похода в системные настройки и не даёт bluetooth-гарнитуре незаметно стать микрофоном.</p><a class="more" href="ru/audio-devices.html">как это работает →</a></div></div></section>
+<section id="install"><h2>установка</h2><ol class="steps"><li>скачайте <code>MacGamingFixes-0.1.1.dmg</code> из <a href="https://github.com/been-earth/mac-gaming-fixes/releases/latest">релизов</a> и откройте.</li><li>перетащите macgamingfixes в «программы».</li><li>разрешите первый запуск: сборка не подписана apple, см. ниже.</li><li>откройте приложение. настройка занимает минуту: язык, где лежит crossover, одно разрешение macos, какие фиксы применить.</li><li>перезапустите то, что работает в бутылке: steam или игру, запущенную из crossover. уже запущенное использует старые файлы, и приложение после каждого применения называет, что перезапустить.</li></ol>
+  <h3>после обновления crossover</h3><div class="note"><p>обновление crossover или повторный патч cxpatcher заменяют пропатченные файлы, так что фиксы слетают, пока их не применить заново. откройте macgamingfixes один раз после обновления: по умолчанию он это заметит и вернёт фиксы сам; если автоповтор выключен — предупредит и оставит переключатели вам.</p></div>
+  <h3>первый запуск: без подписи apple</h3><div class="note"><p>за проектом нет сертификата разработчика apple, поэтому macos один раз остановит приложение и скажет, что не может его проверить. либо откройте <b>системные настройки → конфиденциальность и безопасность</b>, найдите сообщение про macgamingfixes и нажмите <b>всё равно открыть</b>, либо снимите флаг загрузки в терминале:</p>
+  <figure class="code"><pre><code>xattr -dr com.apple.quarantine /Applications/MacGamingFixes.app</code></pre></figure>
+  <p>без пароля администратора, без отключения sip, без полного доступа к диску. единственное разрешение, которое просит настройка, — «управление приложениями», чтобы приложение могло писать внутрь crossover.</p></div>
+</section>
+</main>
+<footer class="bottom"><div class="wrap">автор — илья новиков · <a href="mailto:contact@been.earth">contact@been.earth</a> · <a href="https://github.com/been-earth/mac-gaming-fixes/issues">issues</a> · <a href="https://github.com/been-earth/mac-gaming-fixes/blob/main/LICENSE">лицензия mit</a> · не связано с codeweavers, valve и apple.</div></footer>
+</body>
+</html>

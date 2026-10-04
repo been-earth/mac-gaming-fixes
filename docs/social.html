@@ -1,0 +1,26 @@
+<!doctype html>
+<!-- the social preview: scripts/site.py renders it to social.png with headless chrome at 2x -->
+<html lang="en"><meta charset="utf-8"><title>MacGamingFixes</title>
+<style>
+@font-face { font-family: "Red Hat Mono"; font-weight: 300 700; src: url("assets/RedHatMono.ttf"); }
+:root { --page: #070b09; --card: #101813; --line: #1a251d; --text: #e6efe8; --text-2: #a9b8ad; --muted: #7a8b7e; --accent: #39ff6e; --warning: #ffbd2e; }
+html, body { margin: 0; background: var(--page); }
+body { width: 1280px; height: 640px; box-sizing: border-box; padding: 56px 72px; display: flex; flex-direction: column; justify-content: space-between;
+       font: 400 16px/1.5 "Red Hat Mono", monospace; color: var(--text-2); -webkit-font-smoothing: antialiased; position: relative; overflow: hidden; }
+body::before { content: ""; position: absolute; right: -200px; top: -260px; width: 720px; height: 720px; border-radius: 50%; background: radial-gradient(closest-side, rgba(57, 255, 110, .10), transparent); }
+header { display: flex; align-items: center; gap: 16px; color: var(--text); font-size: 22px; font-weight: 500; letter-spacing: -0.02em; }
+header img { width: 48px; height: 48px; border-radius: 12px; }
+header span { color: var(--muted); font-weight: 400; font-size: 16px; margin-left: 8px; }
+h1 { margin: 0; font: 500 52px/1.15 "Red Hat Mono", monospace; letter-spacing: -0.035em; color: var(--text); max-width: 1040px; }
+h1 b { font-weight: inherit; color: var(--accent); white-space: nowrap; }
+p { margin: 18px 0 0; font-size: 19px; max-width: 980px; }
+ul { margin: 0; padding: 0; list-style: none; display: flex; gap: 14px; }
+li { padding: 12px 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); font-size: 14px; color: var(--muted); }
+li strong { display: block; font: 500 24px/1.2 "Red Hat Mono", monospace; color: var(--text); margin-bottom: 2px; }
+li i { font-style: normal; color: var(--warning); } li em { font-style: normal; color: var(--accent); }
+</style>
+<header><img src="icon.png" alt="">MacGamingFixes<span>// crossover · apple silicon · free</span></header>
+<div><h1>windows games on a mac. no <b>stutter</b>, no <b>net jitter</b>, no <b>crackling sound</b>.</h1>
+<p>fixes for cs2, deadlock and other windows games in crossover: the hitch every 30 seconds, late wi-fi packets, crackling audio and a choppy mic.</p></div>
+<ul><li><strong><i>264 ms</i> → <em>10 ms</em></strong>the freeze every 30 seconds</li><li><strong><i>8.7 ms</i> → <em>3.8 ms</em></strong>latency to the router on wi-fi</li><li><strong><i>6.3 %</i> → <em>0.1 %</em></strong>silence cut into game audio</li></ul>
+</html>

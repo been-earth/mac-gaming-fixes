@@ -13,6 +13,7 @@ switching **headphones and microphone** before a match. Every fix is a switch, a
 puts the original files back.
 
 **[Download the latest release](https://github.com/been-earth/mac-gaming-fixes/releases/latest)** ·
+**[Website](https://been-earth.github.io/mac-gaming-fixes/)** ·
 interface in English and Russian · [по-русски](#по-русски)
 
 ## Symptoms it fixes
@@ -160,6 +161,7 @@ make build   # build/MacGamingFixes.app
 make dmg     # build/MacGamingFixes-<version>.dmg, the installer
 make test    # core tests + the translation check
 make run     # build and open
+make site    # docs/: the GitHub Pages site and the social preview image
 ```
 
 `make dmg` lets Finder lay the installer window out, so it needs a desktop session and the window
@@ -181,7 +183,10 @@ reads the system but never changes it, and saves no settings.
   round trip, the write probe, the quarantine flag, triggers, the article parser, the grid.
 - `scripts/` — app bundling, the installer, the translation check, the asset downloader.
 - `assets/` — sources of the app icon and wordmark, and the installer's background.
-- `docs/` — the picture at the top of this file and the page it is rendered from.
+- `docs/` — the GitHub Pages site at [been-earth.github.io/mac-gaming-fixes](https://been-earth.github.io/mac-gaming-fixes/):
+  two landing pages and the articles as HTML, all written by `scripts/site.py` from the Markdown
+  in `Sources/MGF/Resources` (run `make site` after editing an article); the picture at the top of
+  this file and the page it is rendered from; the social preview image.
 
 ## Status
 
